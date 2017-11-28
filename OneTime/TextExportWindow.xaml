@@ -1,0 +1,51 @@
+﻿<Window x:Class="Nebula.OneTime.TextExportWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="OneTime" Height="350" Width="525"
+        DataContext="{Binding TextExport, Source={StaticResource Locator}}">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="150"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Orientation="Horizontal">
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type Label}">
+                    <Setter Property="Width" Value="100"/>
+                </Style>
+                <Style TargetType="{x:Type TextBox}">
+                    <Setter Property="Width" Value="150"/>
+                </Style>
+            </StackPanel.Resources>
+
+            <Label>Username</Label>
+            <TextBox AcceptsReturn="False" MaxLines="1" Text="{Binding Username}"/>
+            <Label>Password</Label>
+            <TextBox AcceptsReturn="False" MaxLines="1" Text="{Binding Password}"/>
+        </StackPanel>
+        
+        <Button Grid.Row="1" Grid.Column="0" Command="{Binding BrowseFiles}">Browse</Button>
+        <TextBox Grid.Row="1" Grid.Column="1" AcceptsReturn="False" MaxLines="1" Text="{Binding FileName}"/>
+        <Button Grid.Row="1" Grid.Column="2" Command="{Binding OpenFile}">Open file</Button>
+
+        <ScrollViewer Grid.Row="2" Grid.ColumnSpan="3" Grid.Column="0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+            <TextBlock Text="{Binding Timesheet}" FontFamily="Consolas"/>
+        </ScrollViewer>
+
+        <Button IsEnabled="{Binding Parsed}" Grid.Row="3" Grid.Column="0" Command="{Binding SubmitTimesheet}">Submit</Button>
+
+    </Grid>
+    
+</Window>
